@@ -1,0 +1,33 @@
+# ──────────────────────────────────────────────────────────────────
+# Copy this file to terraform.tfvars and fill in real values.
+#   PowerShell:  Copy-Item terraform.tfvars.example terraform.tfvars
+#   Bash:        cp terraform.tfvars.example terraform.tfvars
+# NEVER commit terraform.tfvars to Git.
+# ──────────────────────────────────────────────────────────────────
+
+# Must match Project 1's subscription
+subscription_id = "00000000-0000-0000-0000-000000000000"
+
+# Region — must match Project 1 (Policy enforces this)
+location = "malaysiawest"
+
+# Tags — required by LZ Policy
+tags = {
+  CostCenter = "portfolio-02"
+  Env        = "dev"
+  Owner      = "rajim"
+  Project    = "multitier-webapp"
+}
+
+# App Service (B1 = cheapest with VNet Integration)
+app_service_sku = "B1"
+node_version    = "18-lts"
+
+# Database (Burstable B1ms = cheapest PostgreSQL)
+db_admin_username = "pgadmin"
+db_sku_name       = "B_Standard_B1ms"
+db_storage_mb     = 32768
+db_version        = "15"
+
+# Where alerts go
+alert_email = "your-email@example.com"
