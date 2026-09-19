@@ -8,6 +8,10 @@ resource "azurerm_linux_web_app" "this" {
   service_plan_id     = var.app_service_plan_id
   tags                = var.tags
 
+  # ─── Native Regional VNet Integration ────────────────────────
+  # Direct subnet binding ensures reliable attachment to LZ AppSubnet
+  virtual_network_subnet_id = var.subnet_id
+
   # ─── Public access toggle ─────────────────────────────────────
   public_network_access_enabled = var.public_network_access_enabled
 
@@ -31,10 +35,6 @@ resource "azurerm_linux_web_app" "this" {
 
     # ─── Health check endpoint ────────────────────────────────
     health_check_path = "/health"
-
-    # ─── IP restrictions for backend ──────────────────────────
-    # If public access is disabled, only allow specific sources.
-    # We'll add rules from main.tf when needed.
   }
 
   # ─── App Settings (env vars) ──────────────────────────────────
@@ -66,12 +66,4 @@ resource "azurerm_linux_web_app" "this" {
       app_settings["WEBSITE_RUN_FROM_PACKAGE"],
     ]
   }
-}
-
-# ================================================================
-# VNet Integration (outbound traffic via the LZ spoke subnet)
-# ================================================================
-resource "azurerm_app_service_virtual_network_swift_connection" "this" {
-  app_service_id = azurerm_linux_web_app.this.id
-  subnet_id      = var.subnet_id
 }
