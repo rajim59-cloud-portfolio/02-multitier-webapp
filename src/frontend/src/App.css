@@ -1,0 +1,148 @@
+/* ─── CSS Variables ────────────────────────────────────────────── */
+:root {
+  --az-blue: #0078d4;
+  --az-blue-dark: #005a9e;
+  --success: #107c10;
+  --error: #d13438;
+  --warning: #ffb900;
+  --bg: #f3f2f1;
+  --card-bg: #ffffff;
+  --text: #201f1e;
+  --text-muted: #605e5c;
+  --border: #edebe9;
+  --shadow: 0 1.6px 3.6px rgba(0, 0, 0, 0.08), 0 0.3px 0.9px rgba(0, 0, 0, 0.06);
+}
+
+/* ─── Base ─────────────────────────────────────────────────────── */
+* {
+  box-sizing: border-box;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* ─── Header ───────────────────────────────────────────────────── */
+.app-header {
+  background: linear-gradient(135deg, var(--az-blue) 0%, var(--az-blue-dark) 100%);
+  color: white;
+  padding: 3rem 2rem 2.5rem;
+  text-align: center;
+}
+
+.app-header h1 {
+  margin: 0 0 0.5rem;
+  font-size: 2.25rem;
+  font-weight: 600;
+}
+
+.subtitle {
+  margin: 0;
+  opacity: 0.9;
+  font-size: 1rem;
+}
+
+/* ─── Main ─────────────────────────────────────────────────────── */
+.app-main {
+  flex: 1;
+  padding: 2.5rem 2rem;
+  max-width: 900px;
+  width: 100%;
+  margin: 0 auto;
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 768px) {
+  .app-main {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* ─── Card ─────────────────────────────────────────────────────── */
+.card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1.75rem;
+  box-shadow: var(--shadow);
+}
+
+.card h2 {
+  margin: 0 0 1.25rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+/* ─── Status indicator ─────────────────────────────────────────── */
+.status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  background: var(--bg);
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.status-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--text-muted);
+}
+
+.status-checking .status-dot {
+  background: var(--warning);
+  animation: pulse 1.5s infinite;
+}
+
+.status-connected .status-dot {
+  background: var(--success);
+}
+
+.status-error .status-dot {
+  background: var(--error);
+}
+
+.status-unreachable .status-dot {
+  background: var(--error);
+}
+
+.status-meta {
+  margin: 1rem 0 0;
+  color: var(--text-muted);
+  font-size: 0.875rem;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+/* ─── Placeholder list ─────────────────────────────────────────── */
+.placeholder-list {
+  margin: 0;
+  padding-left: 1.25rem;
+  color: var(--text-muted);
+}
+
+.placeholder-list li {
+  margin-bottom: 0.5rem;
+}
+
+/* ─── Footer ───────────────────────────────────────────────────── */
+.app-footer {
+  padding: 1.5rem 2rem;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.875rem;
+  border-top: 1px solid var(--border);
+  background: var(--card-bg);
+}
